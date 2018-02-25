@@ -23,6 +23,7 @@
                 <td>Ile</td>
                 <td>Kiedy</td>
                 <td>Czym placone</td>
+                <td>Szczegoly</td>
             </tr>
         </thead>
         <tbody>
@@ -32,6 +33,7 @@
                     <td>${cost.amount}</td>
                     <td>${cost.costDate}</td>
                     <td>${cost.type}</td>
+                    <td><a href="${pageContext.servletContext.contextPath}/cost/${cost.id}">Przejdz</a></td>
                 </tr>
             </c:forEach>
         </tbody>

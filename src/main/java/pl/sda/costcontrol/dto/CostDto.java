@@ -17,6 +17,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CostDto {
+    private Long id;
     private String name;
     private LocalDate costDate;
     private BigDecimal amount;
