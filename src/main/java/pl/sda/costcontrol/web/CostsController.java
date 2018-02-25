@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import pl.sda.costcontrol.bo.CostFinder;
+import pl.sda.costcontrol.bo.CostService;
 
 /**
  * @author trutyna
@@ -13,24 +15,30 @@ import pl.sda.costcontrol.bo.CostFinder;
 @Controller
 public class CostsController {
 
-    private final CostFinder finder;
+    private final CostService service;
 
     @Autowired
-    public CostsController(CostFinder finder) {
-        this.finder = finder;
+    public CostsController(CostService service) {
+        this.service = service;
     }
 
     @GetMapping(value = "/costs")
     public ModelAndView costsPage() {
         ModelAndView mav = new ModelAndView("costs");
-        mav.addObject("costs", finder.findCosts());
+        mav.addObject("costs", service.findCosts());
         return mav;
     }
 
     @GetMapping(value = "/cost/{id}")
     public ModelAndView costDetail(@PathVariable("id") Long id) {
         ModelAndView mav = new ModelAndView("costDetail");
-        mav.addObject("cost", finder.findCostDetails(id));
+        mav.addObject("cost", service.findCostDetails(id));
         return mav;
+    }
+
+    @PostMapping(value = "cost/delete")
+    public String deleteCost(@RequestParam(name = "costId") String id) {
+        service.deleteCost(Long.valueOf(id));
+        return "redirect:../costs";
     }
 }

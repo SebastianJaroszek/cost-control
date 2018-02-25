@@ -15,7 +15,7 @@ import java.util.NoSuchElementException;
  * @author trutyna
  */
 @Service
-public class CostFinder {
+public class CostService {
 
     private List<CostDto> costs = new ArrayList<>();
 
@@ -59,5 +59,9 @@ public class CostFinder {
     public CostDto findCostDetails(Long id) {
         return this.costs.stream().filter(c -> c.getId().equals(id))
                 .findFirst().orElseThrow(() -> new NoSuchElementException());
+    }
+
+    public void deleteCost(Long id) {
+        this.costs.removeIf(c -> c.getId().equals(id));
     }
 }
