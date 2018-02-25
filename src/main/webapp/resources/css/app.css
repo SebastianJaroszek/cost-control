@@ -21,3 +21,19 @@ li a {
 li a:hover {
     background-color: #111;
 }
+
+thead tr {
+    background-color: grey;
+}
+
+tbody tr {
+    background-color: lightgray;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
