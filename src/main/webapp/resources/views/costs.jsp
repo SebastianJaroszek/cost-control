@@ -13,5 +13,6 @@
 </head>
 <body>
     <jsp:include page="menu.jsp" />
+    Moje koszty:
 </body>
 </html>
