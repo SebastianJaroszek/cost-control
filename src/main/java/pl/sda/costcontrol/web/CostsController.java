@@ -2,12 +2,16 @@ package pl.sda.costcontrol.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import pl.sda.costcontrol.bo.CostService;
+import pl.sda.costcontrol.dto.NewCostDto;
 
 /**
  * @author trutyna
@@ -39,6 +43,18 @@ public class CostsController {
     @PostMapping(value = "cost/delete")
     public String deleteCost(@RequestParam(name = "costId") String id) {
         service.deleteCost(Long.valueOf(id));
+        return "redirect:../costs";
+    }
+
+    @GetMapping(value = "cost/add")
+    public String addCost(Model model) {
+        model.addAttribute("newCost", new NewCostDto());
+        return "edit";
+    }
+
+    @PostMapping(value = "cost/add")
+    public String saveCost(@ModelAttribute("newCost") NewCostDto form,
+            BindingResult result, Model model) {
         return "redirect:../costs";
     }
 }

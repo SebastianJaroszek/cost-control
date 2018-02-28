@@ -45,5 +45,7 @@
             </c:forEach>
         </tbody>
     </table>
+
+    <a href="${pageContext.servletContext.contextPath}/cost/add">Dodaj wydatek</a>
 </body>
 </html>
