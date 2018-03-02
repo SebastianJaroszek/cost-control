@@ -1,9 +1,6 @@
 package pl.sda.costcontrol.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import pl.sda.costcontrol.type.CostType;
 
 import java.math.BigDecimal;
@@ -13,6 +10,7 @@ import java.time.LocalDate;
  * @author trutyna
  */
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

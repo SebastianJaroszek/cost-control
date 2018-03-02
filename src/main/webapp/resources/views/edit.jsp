@@ -7,7 +7,7 @@
 <body>
     <jsp:include page="menu.jsp" />
     Dodaj/edytuj wydatek:
-    <form:form action="add" modelAttribute="newCost" method="post">
+    <form:form action="${action}" modelAttribute="newCost" method="post">
         <form:input type="hidden" path="id"/><br>
         <form:label path="name">Nazwa wydatku:</form:label>
         <form:input path="name"/><br>
