@@ -6,5 +6,9 @@
 <body>
 <jsp:include page="menu.jsp" />
 Aplikacja do kontrolowania wydatków
+<br>
+Imię: ${firstname}<br>
+Nazwisko: ${lastname}<br>
+Stan konta: ${balance}PLN<br>
 </body>
 </html>

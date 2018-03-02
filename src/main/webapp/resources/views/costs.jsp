@@ -14,6 +14,7 @@
 </head>
 <body>
     <jsp:include page="menu.jsp" />
+    Obecny czas: ${dateAndTime}<br>
     Moje koszty:<br>
 
     <table>
@@ -46,6 +47,7 @@
         </tbody>
     </table>
 
-    <a href="${pageContext.servletContext.contextPath}/cost/add">Dodaj wydatek</a>
+    <a href="${pageContext.servletContext.contextPath}/cost/add">Dodaj wydatek</a><br>
+    <a href="${pageContext.servletContext.contextPath}/cost/search">Wyszukaj wydatki po kwocie</a>
 </body>
 </html>

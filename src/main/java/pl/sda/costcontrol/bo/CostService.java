@@ -2,6 +2,7 @@ package pl.sda.costcontrol.bo;
 
 import org.springframework.stereotype.Service;
 import pl.sda.costcontrol.dto.CostDto;
+import pl.sda.costcontrol.dto.NewCostDto;
 import pl.sda.costcontrol.type.CostType;
 
 import javax.annotation.PostConstruct;
@@ -10,6 +11,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
+
+import static pl.sda.costcontrol.repository.CostDao.costs;
 
 /**
  * @author trutyna
@@ -17,51 +21,18 @@ import java.util.NoSuchElementException;
 @Service
 public class CostService {
 
-    private List<CostDto> costs = new ArrayList<>();
-
-    @PostConstruct
-    public void initList() {
-        costs.add(CostDto.builder()
-                .id(1L)
-                .costDate(LocalDate.now())
-                .type(CostType.CASH)
-                .name("4 beers")
-                .amount(BigDecimal.TEN.setScale(2))
-                .build());
-        costs.add(CostDto.builder()
-                .id(2L)
-                .costDate(LocalDate.now())
-                .type(CostType.CASH)
-                .name("New smartphone")
-                .amount(BigDecimal.valueOf(520).setScale(2))
-
-                .build());
-        costs.add(CostDto.builder()
-                .id(3L)
-                .costDate(LocalDate.now())
-                .type(CostType.CASH)
-                .name("Dinner in restaurant")
-                .amount(BigDecimal.valueOf(43).setScale(2))
-                .build());
-        costs.add(CostDto.builder()
-                .id(4L)
-                .costDate(LocalDate.now())
-                .type(CostType.CASH)
-                .name("Fuel")
-                .amount(BigDecimal.valueOf(100).setScale(2))
-                .build());
-    }
-
-    public List<CostDto> findCosts() {
-        return this.costs;
-    }
-
-    public CostDto findCostDetails(Long id) {
-        return this.costs.stream().filter(c -> c.getId().equals(id))
-                .findFirst().orElseThrow(() -> new NoSuchElementException());
-    }
-
     public void deleteCost(Long id) {
-        this.costs.removeIf(c -> c.getId().equals(id));
+        costs.removeIf(c -> c.getId().equals(id));
+    }
+
+    public void saveCost(NewCostDto newCostDto){
+        CostDto costDto = CostDto.builder()
+                .id(Long.valueOf(costs.size()))
+                .name(newCostDto.getName())
+                .costDate(newCostDto.getDate())
+                .amount(newCostDto.getAmount())
+                .type(newCostDto.getType())
+                .build();
+        costs.add(costDto);
     }
 }
